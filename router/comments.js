@@ -5,6 +5,7 @@ const express = require('express');
 const router0 = express.Router();
 const sqlite3 = require('sqlite3').verbose();
 const queries = require('../database/sql-queries');
+const params = require('../params');
 
 const db = new sqlite3.Database('./database/database.db');
 db_createTableINE_comments();
@@ -98,7 +99,6 @@ router0.post('/', async function(request, response) {
     }
     response.envelope(200);
     
-    const params = require('../params');
     if (params.ADD_TELEGRAM_LISTENER) {
         // send saved comment to me throught telegram bot
         const secret_params = require('../secret-params');
@@ -128,7 +128,9 @@ router0.post('/', async function(request, response) {
     }
 });
 
-router0.use(authBasic());
+if (params.ADD_AUTH_BASIC) {
+    router0.use(authBasic());
+}
 
 router0.get('/', async function(request, response) {
     let [error, rows] = await db_get_comments();
