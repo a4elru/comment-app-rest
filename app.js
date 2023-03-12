@@ -24,5 +24,9 @@ app.use(function(request, response, next) {
     response.envelope(404);
 });
 
-http.createServer(app).listen(params.HTTP_PORT);
-https.createServer(options, app).listen(params.HTTPS_PORT);
+if (params.ADD_HTTP) {
+    http.createServer(app).listen(params.HTTP_PORT);
+}
+if (params.ADD_HTTPS) {
+    https.createServer(options, app).listen(params.HTTPS_PORT);
+}
