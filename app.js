@@ -14,7 +14,9 @@ const options = {
     cert: fs.readFileSync('./cert/certificate.crt'),
 };
 
-app.use(http2https());
+if (params.ADD_HTTP2HTTPS) {
+    app.use(http2https());
+}
 app.use(express.json());
 app.use(envelopeResponse());
 app.use('/api/comments', routerComments);
