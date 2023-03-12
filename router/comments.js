@@ -98,6 +98,8 @@ router0.post('/', async function(request, response) {
     }
     response.envelope(200);
     
+    const params = require('../params');
+    if (params.ADD_TELEGRAM_LISTENER) {
     // send saved comment to me throught telegram bot
     const secret_params = require('../secret-params');
     const token = secret_params.TELEGRAM_BOT_TOKEN;
@@ -123,6 +125,7 @@ router0.post('/', async function(request, response) {
         .catch(function (error) {
             console.log(error);
         });
+    }
 });
 
 router0.use(authBasic());

@@ -2,6 +2,8 @@
 
 const params = {}
 
+params.ADD_TELEGRAM_LISTENER = false;
+
 params.HTTP_PORT = 3000;
 params.HTTPS_PORT = 3001;
 
