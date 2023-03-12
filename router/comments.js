@@ -100,31 +100,31 @@ router0.post('/', async function(request, response) {
     
     const params = require('../params');
     if (params.ADD_TELEGRAM_LISTENER) {
-    // send saved comment to me throught telegram bot
-    const secret_params = require('../secret-params');
-    const token = secret_params.TELEGRAM_BOT_TOKEN;
-    const user_id = secret_params.USER_ID;
-    const axios = require('axios');
-    const data = JSON.stringify({
-        "chat_id": user_id,
-        "text": `${username}: ${text}`
-    });
-    const config = {
-        method: 'get',
-        maxBodyLength: Infinity,
-        url: `https://api.telegram.org/bot${token}/sendMessage`,
-        headers: { 
-            'Content-Type': 'application/json'
-        },
-        data: data
-    };
-    axios(config)
-        .then(function (response) {
-            console.log(JSON.stringify(response.data));
-        })
-        .catch(function (error) {
-            console.log(error);
+        // send saved comment to me throught telegram bot
+        const secret_params = require('../secret-params');
+        const token = secret_params.TELEGRAM_BOT_TOKEN;
+        const user_id = secret_params.USER_ID;
+        const axios = require('axios');
+        const data = JSON.stringify({
+            "chat_id": user_id,
+            "text": `${username}: ${text}`
         });
+        const config = {
+            method: 'get',
+            maxBodyLength: Infinity,
+            url: `https://api.telegram.org/bot${token}/sendMessage`,
+            headers: { 
+                'Content-Type': 'application/json'
+            },
+            data: data
+        };
+        axios(config)
+            .then(function (response) {
+                console.log(JSON.stringify(response.data));
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 });
 
